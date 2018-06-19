@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Team Member
+
+# Model Form Field configuration
+form: $/suresoftware/teamdisplay/models/teammember/fields.yaml
+
+# Model Class name
+modelClass: SureSoftware\TeamDisplay\Models\TeamMember
+
+# Default redirect location
+defaultRedirect: suresoftware/teamdisplay/teammembers
+
+# Create page
+create:
+    title: Create Team Member
+    redirect: suresoftware/teamdisplay/teammembers/update/:id
+    redirectClose: suresoftware/teamdisplay/teammembers
+
+# Update page
+update:
+    title: Edit Team Member
+    redirect: suresoftware/teamdisplay/teammembers
+    redirectClose: suresoftware/teamdisplay/teammembers
+
+# Preview page
+preview:
+    title: Preview Team Member

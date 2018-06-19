@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Tag
+
+# Model Form Field configuration
+form: $/suresoftware/teamdisplay/models/tag/fields.yaml
+
+# Model Class name
+modelClass: SureSoftware\TeamDisplay\Models\Tag
+
+# Default redirect location
+defaultRedirect: suresoftware/teamdisplay/tags
+
+# Create page
+create:
+    title: Create Tag
+    redirect: suresoftware/teamdisplay/tags/update/:id
+    redirectClose: suresoftware/teamdisplay/tags
+
+# Update page
+update:
+    title: Edit Tag
+    redirect: suresoftware/teamdisplay/tags
+    redirectClose: suresoftware/teamdisplay/tags
+
+# Preview page
+preview:
+    title: Preview Tag

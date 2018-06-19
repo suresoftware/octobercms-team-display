@@ -1,0 +1,5 @@
+1.0.1:
+  - "First version of TeamDisplay"
+  - create_tags_table.php
+  - create_team_members_table.php
+  - create_team_member_tags_table.php

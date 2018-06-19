@@ -1,0 +1,42 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    name:
+        label: Name
+        span: auto
+        type: text
+    role:
+        label: Role
+        span: auto
+        type: text
+    description:
+        label: Description
+        span: full
+        type: textarea
+    profileImage:
+        label: Profile Image
+        type: fileupload
+        mode: image-single
+        imageHeight: 400
+        imageWidth: 300
+        thumbOptions:
+            mode: crop
+            offset:
+                - 0
+                - 0
+            quality: 90
+            sharpen: 0
+            interlace: false
+            extension: auto
+    tags:
+        label: Tags
+        type: relation
+        nameFrom: name
+        span: auto
+        emptyOption: 'Select Tags'
+        comment: 'Select Tags'

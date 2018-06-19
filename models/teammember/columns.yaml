@@ -1,0 +1,21 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    name:
+        label: Name
+        type: text
+        searchable: true
+    description:
+        label: Name
+        type: text
+    tags:
+        label: Tags
+        relation: tags
+        select: name
+        searchable: true
+        default: "None"
