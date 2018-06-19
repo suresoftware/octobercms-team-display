@@ -2,7 +2,7 @@
 This plugin is designed to easily manage and display teams on the frontend of a website. Teams and groups can be 
 filtered by tags. 
 
-##### Features  
+### Features  
  - Add, remove and update team members
  - Add, remove and update tags
  - Filter users in each team display by tags, or show all
@@ -15,6 +15,5 @@ filtered by tags.
 3. Add team members and tags
 4. Add the team display component to any pages you want through the CMS
 
-##Future Features
-- Profile Image
+## Future Features
 - Team Member social media links
