@@ -3,3 +3,5 @@
   - create_tags_table.php
   - create_team_members_table.php
   - create_team_member_tags_table.php
+1.0.2:
+  - "CSS Optimisation & Improvements"

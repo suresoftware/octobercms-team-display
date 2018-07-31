@@ -34,6 +34,14 @@ class TeamCards extends ComponentBase
     }
 
     /**
+     * Add the CSS on the fly only once
+     */
+    public function onRun()
+    {
+        $this->addCss('/plugins/suresoftware/teamdisplay/assets/style.css');
+    }
+
+    /**
      * Get the filtered members
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
@@ -44,8 +52,6 @@ class TeamCards extends ComponentBase
         if(!isset($filters['tag']) || empty($filters['tag'])){
             return TeamMember::get();
         } else {
-            Log::info("filtered");
-            Log::info(json_encode(Tag::find($filters['tag'])->teamMembers()->get()));
             return Tag::find($filters['tag'])->teamMembers()->get();
         }
     }
