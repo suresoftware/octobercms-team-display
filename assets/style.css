@@ -43,7 +43,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
     width: 100%;
     opacity: 0;
