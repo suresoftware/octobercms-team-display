@@ -1,5 +1,8 @@
 <?php namespace SureSoftware\TeamDisplay\Models;
 
+use Cms\Classes\Page;
+use Cms\Classes\Theme;
+use Illuminate\Support\Facades\Log;
 use Model;
 
 /**
@@ -55,5 +58,116 @@ class TeamMember extends Model
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
         $slug = preg_replace('~-+~', '-', $slug);
         return $slug;
+    }
+
+    /**
+     * Add the menu type to the site map generation
+     *
+     * @param $type
+     * @return array
+     */
+    public static function getMenuTypeInfo($type){
+        $result = [];
+
+        if ($type == 'team-member-profile') {
+            $result = [
+                'dynamicItems' => true
+            ];
+        }
+
+        if ($result) {
+            $theme = Theme::getActiveTheme();
+
+            $pages = Page::listInTheme($theme, true);
+            $cmsPages = [];
+
+            foreach ($pages as $page) {
+                if (!$page->hasComponent('individualPage')) {
+                    continue;
+                }
+
+                /*
+                 * Component must use a categoryPage filter with a routing parameter and post slug
+                 * eg: categoryPage = "{{ :somevalue }}", slug = "{{ :somevalue }}"
+                 */
+                $properties = $page->getComponentProperties('individualPage');
+                if (!isset($properties['slug']) || !preg_match('/{{\s*:/', $properties['slug'])) {
+                    continue;
+                }
+
+                $cmsPages[] = $page;
+            }
+
+            $result['cmsPages'] = $cmsPages;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Resolve the menu item with the different pages
+     *
+     * @param $item
+     * @param $url
+     * @param $theme
+     * @return array
+     */
+    public static function resolveMenuItem($item, $url, $theme)
+    {
+        $result = [
+            'items' => []
+        ];
+
+        $members = TeamMember::get();
+
+        foreach ($members as $member) {
+            $postItem = [
+                'title' => $member->name,
+                'url' => self::getMemberPageUrl($item->cmsPage, $member, $theme),
+                'mtime' => $member->updated_at
+            ];
+
+            $postItem['isActive'] = $postItem['url'] == $url;
+
+            $result['items'][] = $postItem;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns URL of a profile page.
+     *
+     * @param $pageCode
+     * @param $member
+     * @param $theme
+     * @return string|void
+     */
+    protected static function getMemberPageUrl($pageCode, $member, $theme)
+    {
+        $page = Page::loadCached($theme, $pageCode);
+        if (!$page) {
+            return;
+        }
+
+        $properties = $page->getComponentProperties('individualPage');
+        if (!isset($properties['slug'])) {
+            return;
+        }
+
+        /*
+         * Extract the routing parameter name from the category filter
+         * eg: {{ :someRouteParam }}
+         */
+        if (!preg_match('/^\{\{([^\}]+)\}\}$/', $properties['slug'], $matches)) {
+            return;
+        }
+
+        $params = [
+            'slug'  => $member->slug,
+        ];
+        $url = Page::url($page->getBaseFileName(), $params);
+
+        return $url;
     }
 }

@@ -1,6 +1,8 @@
 <?php namespace SureSoftware\TeamDisplay;
 
 use Backend;
+use Illuminate\Support\Facades\Event;
+use SureSoftware\TeamDisplay\Models\TeamMember;
 use System\Classes\PluginBase;
 
 /**
@@ -40,7 +42,21 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        Event::listen('pages.menuitem.listTypes', function() {
+            return [
+                'team-member-profile' => 'Team Member Profiles',
+            ];
+        });
 
+        Event::listen('pages.menuitem.getTypeInfo', function($type) {
+            if ($type == 'team-member-profile')
+                return TeamMember::getMenuTypeInfo($type);
+        });
+
+        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
+            if ($type == 'team-member-profile')
+                return TeamMember::resolveMenuItem($item, $url, $theme);
+        });
     }
 
     /**

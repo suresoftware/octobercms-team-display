@@ -9,7 +9,10 @@ filtered by tags.
  - Mobile responsive using Bootstrap 4
  - Team Member Fields (Name, Role, Description, Image)
  - Team Member Profile Component
- - Integrates with PowerSEO to provide dynamic page titles and meta descriptions
+
+### Integrations  
+ - `SureSoftware.PowerSEO` to provide dynamic page titles and meta descriptions
+ - `Rainlab.Sitemap` to generate the sitemap for the individual team member pages
 
 ## Setup
 1. Install the plugin through the OctoberCMS market place

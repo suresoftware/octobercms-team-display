@@ -10,7 +10,7 @@ class IndividualPage extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Individual Page',
+            'name' => 'Individual Page',
             'description' => 'Shows a specific team member based'
         ];
     }
@@ -19,10 +19,10 @@ class IndividualPage extends ComponentBase
     {
         return [
             'slug' => [
-                'title'             => 'Team Member Slug',
-                'description'       => 'Slug of the team member',
-                'default'           => '{{ :slug }}',
-                'type'              => 'string'
+                'title' => 'Team Member Slug',
+                'description' => 'Slug of the team member',
+                'default' => '{{ :slug }}',
+                'type' => 'string'
             ]
         ];
     }
