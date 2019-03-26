@@ -33,6 +33,13 @@ class IndividualPage extends ComponentBase
     public function onRun()
     {
         $this->addCss('/plugins/suresoftware/teamdisplay/assets/style.css');
+
+        // integrate with PowerSEO
+        if(isset($this->page->layout->components['SeoCmsPage'])){
+            $member = $this->member();
+            $this->page->layout->components['SeoCmsPage']->seo_title = $member->name;
+            $this->page->layout->components['SeoCmsPage']->seo_description = substr($member->description, 0, 150) . "...";
+        }
     }
 
     /**

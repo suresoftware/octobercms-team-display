@@ -8,3 +8,5 @@
 1.1.0:
   - "Added Team Member Individual Page Component"
   - add_members_slug.php
+1.2.0:
+  - "Added PowerSEO Integration"
