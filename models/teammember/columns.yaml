@@ -10,9 +10,6 @@ columns:
         label: Name
         type: text
         searchable: true
-    description:
-        label: Name
-        type: text
     tags:
         label: Tags
         relation: tags

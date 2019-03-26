@@ -52,6 +52,7 @@ class Plugin extends PluginBase
     {
         return [
             'SureSoftware\TeamDisplay\Components\TeamCards' => 'teamCards',
+            'SureSoftware\TeamDisplay\Components\IndividualPage' => 'individualPage',
         ];
     }
 

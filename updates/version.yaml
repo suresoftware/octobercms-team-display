@@ -5,3 +5,6 @@
   - create_team_member_tags_table.php
 1.0.2:
   - "CSS Optimisation & Improvements"
+1.1.0:
+  - "Added Team Member Individual Page Component"
+  - add_members_slug.php

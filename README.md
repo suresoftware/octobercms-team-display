@@ -8,6 +8,7 @@ filtered by tags.
  - Filter users in each team display by tags, or show all
  - Mobile responsive using Bootstrap 4
  - Team Member Fields (Name, Role, Description, Image)
+ - Team Member Profile Component
 
 ## Setup
 1. Install the plugin through the OctoberCMS market place

@@ -1,6 +1,7 @@
 <?php namespace SureSoftware\TeamDisplay\Components;
 
 use Cms\Classes\ComponentBase;
+use Cms\Classes\Page;
 use Illuminate\Support\Facades\Log;
 use SureSoftware\TeamDisplay\Models\Tag;
 use SureSoftware\TeamDisplay\Models\TeamMember;
@@ -29,8 +30,25 @@ class TeamCards extends ComponentBase
                 'description'       => 'Only show team members with the tag',
                 'type'              => 'dropdown',
                 'options'           => $tags
+            ],
+            'clickable' => [
+                'title'             => 'Clickable',
+                'description'       => 'Don\'t show the description on hover and click through to the member page',
+                'type'              => 'checkbox',
+                'default'           => 'false'
+            ],
+            'page' => [
+                'title'             => 'Member Page',
+                'description'       => 'Page to show the team member on',
+                'type'              => 'dropdown',
+                'default'           => 'team/profile',
             ]
         ];
+    }
+
+    public function getPageOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     /**

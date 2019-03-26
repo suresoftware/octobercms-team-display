@@ -45,4 +45,15 @@ class TeamMember extends Model
         'profileImage' => 'System\Models\File'
     ];
     public $attachMany = [];
+
+    public function afterSave()
+    {
+        $this->slug = self::generateSlug($this->name);
+    }
+
+    public static function generateSlug($name){
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+        $slug = preg_replace('~-+~', '-', $slug);
+        return $slug;
+    }
 }
