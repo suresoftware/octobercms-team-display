@@ -23,6 +23,11 @@ class IndividualPage extends ComponentBase
                 'description' => 'Slug of the team member',
                 'default' => '{{ :slug }}',
                 'type' => 'string'
+            ],
+            'filter' => [
+                'title' => 'Tag Filter',
+                'description' => 'Filters the slugs available by the tag. One Per Line Leave empty if there are to be no filters. Filter names must be spelt exactly the same',
+                'type' => 'stringList',
             ]
         ];
     }
@@ -37,6 +42,10 @@ class IndividualPage extends ComponentBase
         // integrate with PowerSEO
         if(isset($this->page->layout->components['SeoCmsPage'])){
             $member = $this->member();
+            if($member == null){
+                return $this->controller->run('404');
+            }
+
             $this->page->layout->components['SeoCmsPage']->seo_title = $member->name;
             $this->page->layout->components['SeoCmsPage']->seo_description = substr($member->description, 0, 150) . "...";
         }
@@ -64,7 +73,6 @@ class IndividualPage extends ComponentBase
      */
     public function tags(){
         $member = $this->member();
-
         if(!isset($member->tags) || empty($member->tags)){
             return null;
         } else {
