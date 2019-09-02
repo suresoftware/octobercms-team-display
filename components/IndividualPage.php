@@ -1,6 +1,7 @@
 <?php namespace SureSoftware\TeamDisplay\Components;
 
 use Cms\Classes\ComponentBase;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use SureSoftware\TeamDisplay\Models\Tag;
 use SureSoftware\TeamDisplay\Models\TeamMember;
@@ -52,7 +53,7 @@ class IndividualPage extends ComponentBase
     }
 
     /**
-     * Get the specific member to show
+     * Get the specific member to show, filtering if necessary
      *
      * @return TeamMember
      */
@@ -61,6 +62,13 @@ class IndividualPage extends ComponentBase
 
         if(!isset($filters['slug']) || empty($filters['slug'])){
             return null;
+        } else if(isset($filters['filter'])){
+            return TeamMember::with('tags')
+                ->where('slug', $filters['slug'])
+                ->wherehas('tags', function (Builder $query) use ($filters) {
+                    $query->whereIn('name', $filters['filter']);
+                })
+                ->first();
         } else {
             return TeamMember::with('tags')->where('slug', $filters['slug'])->first();
         }

@@ -95,6 +95,7 @@ class TeamMember extends Model
                     continue;
                 }
 
+
                 $cmsPages[] = $page;
             }
 
@@ -118,7 +119,7 @@ class TeamMember extends Model
             'items' => []
         ];
 
-        $members = TeamMember::get();
+        $members = TeamMember::with('tags')->get();
 
         foreach ($members as $member) {
             $postItem = [
@@ -153,6 +154,21 @@ class TeamMember extends Model
         $properties = $page->getComponentProperties('individualPage');
         if (!isset($properties['slug'])) {
             return;
+        }
+
+        /**
+         * Filter the profiles based on the filter of the component
+         */
+        if (isset($properties['filter']) && count($properties['filter']) > 0){
+            $tags = $member->tags;
+
+            //will check that every tag on a profile is in the filters
+            foreach($tags as $tag){
+                if(in_array($tag->name, $properties['filter'])){
+                    continue;
+                }
+                return;
+            }
         }
 
         /*
