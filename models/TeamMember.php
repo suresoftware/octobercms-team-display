@@ -49,9 +49,12 @@ class TeamMember extends Model
     ];
     public $attachMany = [];
 
-    public function afterSave()
-    {
-        $this->slug = self::generateSlug($this->name);
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($member) {
+            $member->slug = self::generateSlug($member->name);
+        });
     }
 
     public static function generateSlug($name){

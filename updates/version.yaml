@@ -13,4 +13,6 @@
 1.3.0:
   - "Added Site Map Generation for Team Member Pages"
 1.4.0:
-  - "Added Site Map Generation for Team Member Pages"
+  - "Added filters to individual team member pages"
+1.4.1:
+  - "Fixed slug generation"
